@@ -1,0 +1,11 @@
+E:\Developer\The Wave\MovieApp\bin\Debug\netcoreapp2.0\MovieApp.deps.json
+E:\Developer\The Wave\MovieApp\bin\Debug\netcoreapp2.0\MovieApp.runtimeconfig.json
+E:\Developer\The Wave\MovieApp\bin\Debug\netcoreapp2.0\MovieApp.runtimeconfig.dev.json
+E:\Developer\The Wave\MovieApp\bin\Debug\netcoreapp2.0\MovieApp.dll
+E:\Developer\The Wave\MovieApp\bin\Debug\netcoreapp2.0\MovieApp.pdb
+E:\Developer\The Wave\MovieApp\obj\Debug\netcoreapp2.0\MovieApp.csprojAssemblyReference.cache
+E:\Developer\The Wave\MovieApp\obj\Debug\netcoreapp2.0\MovieApp.csproj.CoreCompileInputs.cache
+E:\Developer\The Wave\MovieApp\obj\Debug\netcoreapp2.0\MovieApp.AssemblyInfoInputs.cache
+E:\Developer\The Wave\MovieApp\obj\Debug\netcoreapp2.0\MovieApp.AssemblyInfo.cs
+E:\Developer\The Wave\MovieApp\obj\Debug\netcoreapp2.0\MovieApp.dll
+E:\Developer\The Wave\MovieApp\obj\Debug\netcoreapp2.0\MovieApp.pdb
