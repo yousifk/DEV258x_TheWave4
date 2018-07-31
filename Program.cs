@@ -10,7 +10,7 @@ namespace MovieApp {
             // Module1Helper.CreateItem ();
             // Module1Helper.UpdateItem ();
             // Module1Helper.DeleteItem();
-
+            Module1Helper.SelfAssessment();
         }
     }
 }

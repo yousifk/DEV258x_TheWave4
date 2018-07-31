@@ -136,6 +136,27 @@ namespace MovieApp {
                 }
             }
         }
+
+        public static void SelfAssessment () {
+            SelectListOfFilms (false);
+            for (int i = 1; i <= 5; i++)
+                MoviesContext.Instance.Films.Add (new Film { Title = "Test Film " });
+            SelectListOfFilms (true);
+
+            foreach (var film in MoviesContext.Instance.Films.Where (a => a.FilmId % 2 == 0))
+                film.Title = "Awesome " + film.Title;
+            SelectListOfFilms (true);
+
+            foreach (var film in MoviesContext.Instance.Films.Where (a => a.Title.Contains ("Test Film")))
+                MoviesContext.Instance.Films.Remove (film);
+            SelectListOfFilms (true);
+
+            foreach (var film in MoviesContext.Instance.Films.Where (a => a.Title.Contains ("Awesome"))) {
+                film.Title = film.Title.Replace ("Awesome ", "");
+            }
+            SelectListOfFilms (true);
+
+        }
         private static void WriteActors () {
             var actors = MoviesContext.Instance.Actors
                 .Select (a => a.Copy<Actor, ActorModel> ());
@@ -147,5 +168,12 @@ namespace MovieApp {
                 .Select (f => f.Copy<Film, FilmModel> ());
             ConsoleTable.From (films).Write ();
         }
+
+        private static void SelectListOfFilms (Boolean isApplyed) {
+            if (isApplyed) MoviesContext.Instance.SaveChanges ();
+            var films = MoviesContext.Instance.Films.Select (f => f.Copy<Film, FilmModel> ());
+            ConsoleTable.From (films).Write ();
+        }
+
     }
 }
