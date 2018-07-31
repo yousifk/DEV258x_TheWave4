@@ -28,13 +28,28 @@ namespace MovieApp {
             ConsoleTable.From (films).Write ();
         }
         public static void Skip () {
-            Console.WriteLine (nameof (Skip));
+            var films = MoviesContext.Instance.Films
+                .OrderBy (f => f.Title)
+                .Skip (3)
+                .Select (f => f.Copy<Film, FilmModel> ());
+            ConsoleTable.From (films).Write ();
         }
         public static void Take () {
-            Console.WriteLine (nameof (Take));
+            var films = MoviesContext.Instance.Films
+                .OrderBy (f => f.Title)
+                .Take (5)
+                .Select (f => f.Copy<Film, FilmModel> ());
+            ConsoleTable.From (films).Write ();
         }
         public static void Paging () {
-            Console.WriteLine (nameof (Paging));
+            var pageSize = 5;
+            var pageNumber = 2;
+            var films = MoviesContext.Instance.Films
+                .OrderBy (f => f.Title)
+                .Skip ((pageNumber - 1) * pageSize)
+                .Take (pageSize)
+                .Select (f => f.Copy<Film, FilmModel> ());
+            ConsoleTable.From (films).Write ();
         }
 
     }
