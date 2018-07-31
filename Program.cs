@@ -18,8 +18,10 @@ namespace MovieApp {
 
             //   var FilmsAfter5 =  MoviesContext.Instance.Films.Skip(5);
 
+            // Module2Helper.Sort();
+            
+            Module2Helper.Skip();
 
-               Module2Helper.Sort();
 
         }
     }

@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "00d26de67f0c4293cd195dab62a7fa05db33a5d7"
+    "signature": "2b02f13ab7f8f77ff96a983e1438b1cda39c7710"
   },
   "compilationOptions": {},
   "targets": {
@@ -11,6 +11,7 @@
           "ConsoleTables": "2.2.0",
           "Microsoft.EntityFrameworkCore": "2.1.1",
           "Microsoft.EntityFrameworkCore.Design": "2.1.1",
+          "MiniProfiler.EF6": "4.0.133",
           "Pomelo.EntityFrameworkCore.MySql": "2.1.1",
           "Pomelo.EntityFrameworkCore.MySql.Design": "1.1.2"
         },
@@ -195,6 +196,11 @@
         }
       },
       "Microsoft.NETCore.Targets/1.1.0": {},
+      "MiniProfiler.EF6/4.0.133": {
+        "runtime": {
+          "lib/net461/MiniProfiler.EF6.dll": {}
+        }
+      },
       "MySqlConnector/0.42.1": {
         "dependencies": {
           "System.Buffers": "4.4.0",
@@ -768,6 +774,13 @@
       "sha512": "sha512-aOZA3BWfz9RXjpzt0sRJJMjAscAUm3Hoa4UWAfceV9UTYxgwZ1lZt5nO2myFf+/jetYQo4uTP7zS8sJY67BBxg==",
       "path": "microsoft.netcore.targets/1.1.0",
       "hashPath": "microsoft.netcore.targets.1.1.0.nupkg.sha512"
+    },
+    "MiniProfiler.EF6/4.0.133": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Wjk8kZKDB1aQK526uzjaCB2qTG6b96O4Oks8LAkunJl30Bzv/k1MRs9ZAw26Z1rm/hyEYbpiS2wSuLUAaFt/7A==",
+      "path": "miniprofiler.ef6/4.0.133",
+      "hashPath": "miniprofiler.ef6.4.0.133.nupkg.sha512"
     },
     "MySqlConnector/0.42.1": {
       "type": "package",

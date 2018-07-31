@@ -1,12 +1,13 @@
 using System;
-using System.Data.Entity;
 using System.Linq;
 using ConsoleTables;
+using Microsoft.EntityFrameworkCore;
 using MovieApp.Entities;
 using MovieApp.Extensions;
 using MovieApp.Models.Models;
 
-namespace MovieApp {
+namespace MovieApp
+{
     public static class Module1Helper {
         internal static void SelectList () {
             var actors = MoviesContext.Instance.Actors.Select (a => a.Copy<Actor, ActorModel> ());
