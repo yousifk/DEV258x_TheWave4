@@ -12,7 +12,6 @@ namespace MovieApp {
         internal static void SelectById () {
             Console.WriteLine ("Enter an Actor ID");
             var actorId = Console.ReadLine ().ToInt ();
-            Console.WriteLine (actorId + "");
             var actor = MoviesContext.Instance.Actors.SingleOrDefault (a => a.ActorId == actorId);
             if (actor == null) {
                 Console.WriteLine ($"Actor with ID {actorId} not found.");
