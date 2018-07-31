@@ -43,16 +43,28 @@ namespace MovieApp {
             ConsoleTable.From (films).Write ();
         }
         public static void Paging () {
-            var pageSize = 5;
-            var pageNumber = 2;
+            Console.WriteLine ("Enter a page size:");
+            var pageSize = Console.ReadLine ().ToInt ();
+
+            Console.WriteLine ("Enter a page number:");
+            var pageNumber = Console.ReadLine ().ToInt ();
+
+            Console.WriteLine ("Enter a sort column:");
+            Console.WriteLine ("\ti - Film ID");
+            Console.WriteLine ("\tt - Title");
+            Console.WriteLine ("\ty - Year");
+            Console.WriteLine ("\tr - Rating");
+            var key = Console.ReadKey ();
+
+            Console.WriteLine ();
+
             var films = MoviesContext.Instance.Films
-                .OrderBy (f => f.Title)
+                .OrderBy (GetSort (key))
                 .Skip ((pageNumber - 1) * pageSize)
                 .Take (pageSize)
                 .Select (f => f.Copy<Film, FilmModel> ());
             ConsoleTable.From (films).Write ();
         }
-
 
         private static Expression<Func<Film, object>> GetSort (ConsoleKeyInfo info) {
             switch (info.Key) {
