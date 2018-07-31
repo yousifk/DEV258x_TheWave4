@@ -1,4 +1,5 @@
 using System;
+using System.Data.Entity;
 using System.Linq;
 using ConsoleTables;
 using MovieApp.Entities;
@@ -173,6 +174,11 @@ namespace MovieApp {
             if (isApplyed) MoviesContext.Instance.SaveChanges ();
             var films = MoviesContext.Instance.Films.Select (f => f.Copy<Film, FilmModel> ());
             ConsoleTable.From (films).Write ();
+        }
+
+        public static void MakeTableFilms (DbSet<Film> films) {
+            var filmsO = films.Select (f => f.Copy<Film, FilmModel> ());
+            ConsoleTable.From (filmsO).Write ();
         }
 
     }

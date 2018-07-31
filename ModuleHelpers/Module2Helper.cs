@@ -1,4 +1,9 @@
 using System;
+using System.Linq;
+using ConsoleTables;
+using MovieApp.Entities;
+using MovieApp.Extensions;
+using MovieApp.Models.Models;
 
 namespace MovieApp {
     public static class Module2Helper {
@@ -16,7 +21,11 @@ namespace MovieApp {
             ConsoleTable.From (films).Write ();
         }
         public static void SortDescending () {
-            Console.WriteLine (nameof (SortDescending));
+            var films = MoviesContext.Instance.Films
+                .OrderByDescending (f => f.Rating)
+                .ThenBy (f => f.Title)
+                .Select (f => f.Copy<Film, FilmModel> ());
+            ConsoleTable.From (films).Write ();
         }
         public static void Skip () {
             Console.WriteLine (nameof (Skip));

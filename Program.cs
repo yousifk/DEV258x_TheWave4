@@ -12,11 +12,14 @@ namespace MovieApp {
             // Module1Helper.DeleteItem();
             // Module1Helper.SelfAssessment();
 
-         /*   var orderedFilms = MoviesContext.Instance.Films.OrderByDescending (s => s.Title);
-            foreach (var Film in orderedFilms)
-                Console.WriteLine (Film.FilmId + ":" + Film.Title);*/
+            /* var orderedFilms = MoviesContext.Instance.Films.OrderByDescending (s => s.Title);
+               foreach (var Film in orderedFilms)
+               Console.WriteLine (Film.FilmId + ":" + Film.Title);*/
 
             //   var FilmsAfter5 =  MoviesContext.Instance.Films.Skip(5);
+
+
+               Module2Helper.Sort();
 
         }
     }
