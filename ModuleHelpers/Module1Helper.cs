@@ -1,12 +1,18 @@
 using System;
 using System.Linq;
+using ConsoleTables;
 using MovieApp.Entities;
 using MovieApp.Extensions;
+using MovieApp.Models;
 
 namespace MovieApp {
     public static class Module1Helper {
         internal static void SelectList () {
-            Console.WriteLine (nameof (SelectList));
+            var actors = MoviesContext.Instance.Actors.Select (a => a.Copy<Actor, ActorModel> ());
+            ConsoleTable.From (actors).Write ();
+
+            var films = MoviesContext.Instance.Films.Select (f => f.Copy<Film, FilmModel> ());
+            ConsoleTable.From (films).Write ();
         }
 
         internal static void SelectById () {
@@ -29,7 +35,32 @@ namespace MovieApp {
             }
         }
         internal static void CreateItem () {
-            Console.WriteLine (nameof (CreateItem));
+            // Actor code omitted for brevity
+
+            Console.WriteLine ("Add a Film");
+
+            Console.WriteLine ("Enter a Title");
+            var title = Console.ReadLine ();
+
+            Console.WriteLine ("Enter a Description");
+            var description = Console.ReadLine ();
+
+            Console.WriteLine ("Enter a Release Year");
+            var year = Console.ReadLine ().ToInt ();
+
+            Console.WriteLine ("Enter a Rating");
+            var rating = Console.ReadLine ();
+
+            var film = new Film { Title = title, Description = description, ReleaseYear = year, Rating = rating };
+
+            MoviesContext.Instance.Films.Add (film);
+
+            MoviesContext.Instance.SaveChanges ();
+
+            var films = MoviesContext.Instance.Films
+                .Where (f => f.FilmId == film.FilmId)
+                .Select (f => f.Copy<Film, FilmModel> ());
+            ConsoleTable.From (films).Write ();
         }
 
         internal static void UpdateItem () {
