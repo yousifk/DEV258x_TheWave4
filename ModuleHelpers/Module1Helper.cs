@@ -64,11 +64,88 @@ namespace MovieApp {
         }
 
         internal static void UpdateItem () {
-            Console.WriteLine (nameof (UpdateItem));
+            // update actor code removed for brevity
+
+            Console.WriteLine ("Update a Film");
+
+            Console.WriteLine ("Enter a Film ID");
+            var filmId = Console.ReadLine ().ToInt ();
+
+            var film = MoviesContext.Instance.Films
+                .SingleOrDefault (a => a.FilmId == filmId);
+            if (film == null) {
+                Console.WriteLine ($"Film with id {filmId} not found");
+            } else {
+                ConsoleTable.From (new [] { film.Copy<Film, FilmModel> () })
+                    .Write ();
+
+                Console.WriteLine ("Enter the Title");
+                var title = Console.ReadLine ().Trim ();
+
+                Console.WriteLine ("Enter the Release Year");
+                var releaseYear = Console.ReadLine ().ToInt ();
+
+                Console.WriteLine ("Enter the Rating");
+                var rating = Console.ReadLine ().Trim ();
+
+                if (!string.IsNullOrWhiteSpace (title) && film.Title != title) {
+                    film.Title = title;
+                }
+
+                if (releaseYear > 0 && film.ReleaseYear != releaseYear) {
+                    film.ReleaseYear = releaseYear;
+                }
+
+                if (!string.IsNullOrWhiteSpace (rating) && film.Rating != rating) {
+                    film.Rating = rating;
+                }
+
+                MoviesContext.Instance.SaveChanges ();
+
+                var films = MoviesContext.Instance.Films
+                    .Where (a => a.FilmId == filmId)
+                    .Select (a => a.Copy<Film, FilmModel> ());
+                ConsoleTable.From (films).Write ();
+            }
         }
 
         internal static void DeleteItem () {
-            Console.WriteLine (nameof (DeleteItem));
+            // delete actor code removed for brevity
+
+            Console.WriteLine ("Delete a Film");
+
+            Console.WriteLine ("Enter Film Title search");
+            var title = Console.ReadLine ();
+
+            var film = MoviesContext.Instance.Films
+                .FirstOrDefault (f => f.Title.Contains (title));
+
+            if (film == null) {
+                Console.WriteLine ($"Film with title that contains '{title}' not found");
+            } else {
+                ConsoleTable.From (new [] { film.Copy<Film, FilmModel> () }).Write ();
+                Console.WriteLine ("Are you sure you want to delete this film?");
+                if (Console.ReadKey ().Key == ConsoleKey.Y) {
+                    MoviesContext.Instance.Films.Remove (film);
+
+                    MoviesContext.Instance.SaveChanges ();
+
+                    WriteFilms ();
+                } else {
+                    Console.WriteLine (" No Films deleted");
+                }
+            }
+        }
+        private static void WriteActors () {
+            var actors = MoviesContext.Instance.Actors
+                .Select (a => a.Copy<Actor, ActorModel> ());
+            ConsoleTable.From (actors).Write ();
+        }
+
+        private static void WriteFilms () {
+            var films = MoviesContext.Instance.Films
+                .Select (f => f.Copy<Film, FilmModel> ());
+            ConsoleTable.From (films).Write ();
         }
     }
 }
