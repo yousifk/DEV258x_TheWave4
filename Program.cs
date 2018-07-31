@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using MovieApp.Entities;
 
 namespace MovieApp
 {
@@ -6,7 +8,9 @@ namespace MovieApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!"+DateTime.Now.ToLongTimeString());
+
+            var context = new MoviesContext();
+            Console.WriteLine(context.Films.Count().ToString());
         }
     }
 }
