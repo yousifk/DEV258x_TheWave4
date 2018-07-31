@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Linq.Expressions;
 using ConsoleTables;
 using MovieApp.Entities;
 using MovieApp.Extensions;
@@ -52,5 +53,18 @@ namespace MovieApp {
             ConsoleTable.From (films).Write ();
         }
 
+
+        private static Expression<Func<Film, object>> GetSort (ConsoleKeyInfo info) {
+            switch (info.Key) {
+                case ConsoleKey.I:
+                    return f => f.FilmId;
+                case ConsoleKey.Y:
+                    return f => f.ReleaseYear;
+                case ConsoleKey.R:
+                    return f => f.Rating;
+                default:
+                    return f => f.Title;
+            }
+        }
     }
 }
