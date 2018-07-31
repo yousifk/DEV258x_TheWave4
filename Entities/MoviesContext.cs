@@ -11,46 +11,53 @@ namespace MovieApp.Entities
         public virtual DbSet<Film> Films { get; set; }
         public virtual DbSet<FilmActor> FilmActors { get; set; }
         public virtual DbSet<FilmCategory> FilmCategories { get; set; }
-        public MoviesContext()
-        {
-        }
 
-        public MoviesContext(DbContextOptions<MoviesContext> options)
-            : base(options)
+        private static MoviesContext _context;
+        public static MoviesContext Instance
         {
+            get
+            {
+                if (_context == null)
+                {
+                    _context = new MoviesContext();
+                }
+                return _context;
+            }
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySql("server=127.0.0.1;userid=root;pwd=admin;port=3306;database=movies;sslmode=none;");
+// #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseMySql("server=localhost;userid=root;pwd=admin;port=3306;database=Movies;sslmode=none;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Actor>(entity =>
-          {
-              entity.ToTable("actor");
+            {
+                entity.ToTable("actor");
 
-              entity.Property(e => e.ActorId)
-                .HasColumnName("int(11)")
-                .ValueGeneratedNever();
+                entity.Property(e => e.ActorId)
+                    .HasColumnType("int(11)");
 
-              entity.Property(e => e.FirstName)
-                  .IsRequired()
-                  .HasMaxLength(45);
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasMaxLength(45);
 
-              entity.Property(e => e.LastName)
-                  .IsRequired()
-                  .HasMaxLength(45);
-          });
+                entity.Property(e => e.LastName)
+                    .IsRequired()
+                    .HasMaxLength(45);
+            });
 
             modelBuilder.Entity<Category>(entity =>
             {
                 entity.ToTable("category");
+
+                entity.Property(e => e.CategoryId)
+                    .HasColumnType("int(11)");
 
                 entity.Property(e => e.Name).HasMaxLength(45);
             });
@@ -58,6 +65,9 @@ namespace MovieApp.Entities
             modelBuilder.Entity<Film>(entity =>
             {
                 entity.ToTable("film");
+
+                entity.Property(e => e.FilmId)
+                    .HasColumnType("int(11)");
 
                 entity.Property(e => e.Description).HasColumnType("text");
 
@@ -124,4 +134,3 @@ namespace MovieApp.Entities
         }
     }
 }
-
