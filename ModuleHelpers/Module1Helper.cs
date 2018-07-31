@@ -3,7 +3,7 @@ using System.Linq;
 using ConsoleTables;
 using MovieApp.Entities;
 using MovieApp.Extensions;
-using MovieApp.Models;
+using MovieApp.Models.Models;
 
 namespace MovieApp {
     public static class Module1Helper {

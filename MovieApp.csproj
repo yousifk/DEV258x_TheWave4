@@ -3,6 +3,9 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>net4.6.1</TargetFramework>
+    <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
+
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +14,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.1" />
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1" />
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
+    <PackageReference Include="MiniProfiler.EF6" Version="4.0.133" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.1" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql.Design" Version="1.1.2" />
   </ItemGroup>
