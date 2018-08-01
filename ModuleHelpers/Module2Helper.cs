@@ -31,13 +31,13 @@ namespace MovieApp {
         public static void Skip () {
             var films = MoviesContext.Instance.Films
                 .OrderBy (f => f.Title)
-                .Skip (3)
+                .Skip (0)
                 .Select (f => f.Copy<Film, FilmModel> ());
             ConsoleTable.From (films).Write ();
         }
         public static void Take () {
             var films = MoviesContext.Instance.Films
-                .OrderBy (f => f.Title)
+                .OrderBy (f => f.FilmId)
                 .Take (5)
                 .Select (f => f.Copy<Film, FilmModel> ());
             ConsoleTable.From (films).Write ();
@@ -77,6 +77,33 @@ namespace MovieApp {
                 default:
                     return f => f.Title;
             }
+        }
+
+        public static void LambdaBasics () {
+            var films = MoviesContext.Instance.Films
+                .Where (f => f.FilmId == 4)
+                .Select (f => f.Copy<Film, FilmModel> ());
+            ConsoleTable.From (films).Write ();
+
+            var search = "g";
+            var films1 = MoviesContext.Instance.Films
+                .Where (f => f.Title.Contains (search))
+                .OrderByDescending (f => f.Title)
+                .Select (f => f.Copy<Film, FilmModel> ());
+            ConsoleTable.From (films1).Write ();
+        }
+        public static void MigrationAddColumn () {
+            var film = MoviesContext.Instance.Films
+                .FirstOrDefault (f => f.Title.Contains ("the first avenger"));
+            if (film != null) {
+                Console.WriteLine ($"Updating film with id {film.FilmId}");
+                film.Runtime = 124;
+                MoviesContext.Instance.SaveChanges ();
+            }
+
+            var films = MoviesContext.Instance.Films
+                .Select (f => f.Copy<Film, FilmModel> ());
+            ConsoleTable.From (films).Write ();
         }
     }
 }

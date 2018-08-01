@@ -20,7 +20,8 @@ namespace MovieApp {
 
             // Module2Helper.Sort();
             
-            Module2Helper.Skip();
+           // Module2Helper.Skip();
+            Module2Helper.Take();
 
 
         }
